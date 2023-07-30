@@ -1,0 +1,37 @@
+.nav-bar-container {
+  display: flex;
+  background-color: #2f2d52;
+  color: white;
+  font-size: 14px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 10px;
+  max-height: 25px;
+}
+
+.user-details {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat-title {
+  font-weight: bold;
+}
+
+.nav-bar-img {
+  background-color: #ddddf7;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-bar-btn {
+  font-size: 12px;
+  border: none;
+  background-color: #5d5b8d;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
+}

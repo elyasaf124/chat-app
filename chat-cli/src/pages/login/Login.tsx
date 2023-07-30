@@ -1,0 +1,97 @@
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLoginStatus, setUserDetails } from "../../features/loginMoodSlice";
+import "./login.css";
+
+const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errorLogin, setErrorLogin] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const login = async (
+    e:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    try {
+      await axios
+        .create({ withCredentials: true })
+        .post(`http://localhost:3000/user/login`, {
+          email: user.email,
+          password: user.password,
+        })
+        .then((res) => {
+          dispatch(setLoginStatus());
+          dispatch(setUserDetails(res.data.user));
+          navigate("/");
+        });
+    } catch (error: any) {
+      setErrorLogin(true);
+      setErrorMsg(error.response.data.message);
+    }
+  };
+
+  return (
+    <div className="register">
+      <div className="register-container">
+        <div className="register-box">
+          <form onSubmit={(e) => login(e)} className="register-form">
+            <div className="top">
+              <h4 className="title-register-form">Elyasaf Chat</h4>
+              <span className="sub-title">Login</span>
+            </div>
+            <div className="register-input-container">
+              <label className="register-label email"> email</label>
+              <input
+                id="email"
+                onChange={(e) => handleChange(e)}
+                type="email"
+                className="register-input email"
+              />
+            </div>
+            <div className="register-input-container">
+              <label className="register-label password">password</label>
+              <input
+                id="password"
+                onChange={(e) => handleChange(e)}
+                type="password"
+                className="register-input password"
+              />
+            </div>
+            {errorLogin && (
+              <span className="error-login-msg">* {errorMsg}</span>
+            )}
+            <button className="register-form-btn" onClick={(e) => login(e)}>
+              Sign in
+            </button>
+            <span className="to-login-text">
+              do not have an account?
+              <a
+                className="to-login-comp"
+                onClick={() => navigate("/register")}
+              >
+                {" "}
+                sign up
+              </a>
+            </span>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

@@ -1,0 +1,21 @@
+.chatUnActive {
+  height: 55px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #5d5b8d;
+}
+
+.chatUnActive-container {
+  width: 100%;
+}
+
+.chatUnActive-icons {
+  display: flex;
+  justify-content: end;
+  margin-right: 10px;
+}
+
+.chatUnActive-icons img {
+  height: 24px;
+}

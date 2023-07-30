@@ -1,0 +1,58 @@
+.input-msg {
+  background-color: white;
+  padding: 0 6px;
+  height: 9%;
+}
+
+.input-msg-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.msg-input {
+  width: 70%;
+  border: none;
+  height: 50%;
+  outline: none;
+}
+.right-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.right-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.input-msg-btn {
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  background-color: #8da4f1;
+  cursor: pointer;
+}
+
+.input-msg-btn:hover {
+  background-color: #446ef7;
+}
+
+.img-icon {
+  height: 36px;
+  cursor: pointer;
+}
+
+.delete-img {
+  font-weight: bold;
+  cursor: pointer;
+  background-color: aliceblue;
+  padding: 5px;
+}
+
+.sound-wave {
+  display: none;
+}
