@@ -54,18 +54,18 @@ function App() {
           const modifiedMsg = { ...msg, read: 1 };
           addNewMsg(modifiedMsg);
           dispatch(updateChatConversation(modifiedMsg));
-          setRenderMessages();
           dispatch(setLastMsg(modifiedMsg));
           updateChatsOrder(modifiedMsg);
+          setRenderMessages();
           dispatch(setRenderChats());
 
           return;
         } else {
           dispatch(updateChatConversation(msg));
-          setRenderMessages();
           dispatch(setLastMsg(msg));
           addNewMsg(msg);
           updateChatsOrder(msg);
+          setRenderMessages();
           dispatch(setRenderChats());
 
           return;
@@ -101,10 +101,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/addUserContact" element={<AddUserContact />} />
         <Route path="/" element={isLoggedIn ? <Home /> : <Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/login" element={isLoggedIn ? <Home /> : <Login />} />
+        <Route path="/addUserContact" element={<AddUserContact />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );

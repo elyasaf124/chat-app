@@ -25,8 +25,8 @@ const Chats = ({ chat, contacts }: { chat: IData; contacts: IRefUser[] }) => {
 
   const [userContactDetails, setUserContactDetails] = useState<IRefUser[]>([]);
   const [countUnReadMsg, setCountUnReadMsg] = useState<number>(0);
-  const [lastMsg, setLastMsg] = useState<IMessage>();
   const [openDeleteBtn, setOpenDeleteBtn] = useState(false);
+  const [lastMsg, setLastMsg] = useState<IMessage>();
 
   useEffect(() => {
     const userDetails: Array<IRefUser> = contacts?.filter(

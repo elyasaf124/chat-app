@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./inputMsg.css";
-import Img from "../../images/img.png";
 import { MdSettingsVoice } from "@react-icons/all-files/md/MdSettingsVoice";
-import RecordRTC from "recordrtc";
 import { cloudinaryFunction } from "../../cloudinary";
+import Img from "../../images/img.png";
+import RecordRTC from "recordrtc";
+import "./inputMsg.css";
 
 const InputMsg = ({ sendMsg }: any) => {
   const [msg, setMsg] = useState<any>("");
