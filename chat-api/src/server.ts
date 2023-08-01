@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import http from "http";
 import app from "./app";
 import { socketFunctionality } from "./socket";
+
+dotenv.config({ path: "./.env" });
 
 export const server = http.createServer(app);
 socketFunctionality(server);
