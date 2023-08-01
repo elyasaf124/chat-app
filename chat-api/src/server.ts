@@ -5,8 +5,9 @@ import { socketFunctionality } from "./socket";
 
 export const server = http.createServer(app);
 socketFunctionality(server);
-
+console.log(process.env.DATABASE);
 const DB = process.env.DATABASE as string;
+console.log(DB);
 
 mongoose
   .connect(DB)
