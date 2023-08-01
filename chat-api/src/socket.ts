@@ -21,14 +21,13 @@ const getUser = (userId: any) => {
 };
 
 export const socketFunctionality = (server: any) => {
-  console.log("webOrigin=>", webOrigin);
   const io = new SocketIo(server, {
     cors: {
       origin: [
         "https://chat-cli.onrender.com",
         "https://chat-api-ckbb.onrender.com",
+        "http://localhost:3001",
       ],
-      // origin: ["http://localhost:3001", "https://chat-cli.onrender.com"],
     },
   });
 
