@@ -18,7 +18,12 @@ export default app;
 
 export const corsOptions: any = {
   credentials: true,
-  origin: ["http://localhost:3001", "http://localhost:3000/socket.io"],
+  origin: [
+    "http://localhost:3001",
+    "http://localhost:3000/socket.io",
+    "https://chat-cli.onrender.com",
+    "https://chat-api-ckbb.onrender.com",
+  ],
   optionsSuccessStatus: 200,
 };
 

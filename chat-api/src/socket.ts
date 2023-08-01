@@ -1,6 +1,7 @@
 import { Server as SocketIo } from "socket.io";
 import { AppError } from "./utilitis/appError";
 import { v4 as uuidv4 } from "uuid";
+import { webOrigin } from "./webOrigin";
 
 let users: any = [];
 
@@ -23,7 +24,8 @@ const getUser = (userId: any) => {
 export const socketFunctionality = (server: any) => {
   const io = new SocketIo(server, {
     cors: {
-      origin: ["http://localhost:3001"],
+      origin: webOrigin,
+      // origin: ["http://localhost:3001", "https://chat-cli.onrender.com"],
     },
   });
 

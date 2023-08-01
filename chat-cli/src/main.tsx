@@ -13,7 +13,7 @@ export let baseUrl = "";
 if (process.env.NODE_ENV === "production") {
   console.log("prod");
   disableReactDevTools();
-  baseUrl = "https://chat-cli.onrender.com";
+  baseUrl = "https://chat-api-ckbb.onrender.com";
 } else if (process.env.NODE_ENV === "development") {
   console.log("dev");
   baseUrl = "http://localhost:3000";
