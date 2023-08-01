@@ -25,7 +25,6 @@ export const createSendToken = async (
   statusCode: number,
   res: Response
 ) => {
-  console.log("22222222");
   const token = await signToken(user._id);
   const cookieOptions = {
     expires: new Date(
@@ -82,8 +81,6 @@ export const signup = async (
 
     next();
   } catch (error: any) {
-    console.log("!!!!", error);
-    console.log("!!!!", error._message);
     res.status(400).json({
       status: "fail",
       errorMsg: "please fill all details",

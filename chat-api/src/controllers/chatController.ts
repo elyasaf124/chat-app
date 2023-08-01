@@ -80,7 +80,6 @@ export const findChat2 = async (
 
     const chatResults = await Promise.all(chatPromises);
     const chats = chatResults.flat();
-    console.log(chats);
 
     const data = chats.map(async (chat: any) => {
       // const chat = await Chat.find({ members: { $all: ids } });
@@ -126,7 +125,6 @@ export const findChat2 = async (
       };
     });
 
-    console.log("aaa", mergedData);
 
     res.status(200).json({
       status: "success",
@@ -146,7 +144,6 @@ export const getAllChats = async (
 ) => {
   try {
     const chats = await Chat.find({ members: { $in: [req.user._id] } });
-    console.log(chats);
 
     res.status(200).json({
       status: "success",
@@ -164,8 +161,7 @@ export const getChatById = async (
 ) => {
   try {
     const chat = await Chat.findById(req.params.chatId);
-    console.log(req.params.chatId);
-    console.log(chat);
+   
 
     res.status(200).json({
       status: "success",

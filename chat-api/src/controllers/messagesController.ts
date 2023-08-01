@@ -13,9 +13,6 @@ export const sendMsg = async (req: any, res: Response, next: NextFunction) => {
     arr.push(req.user._id);
 
     const chat: any = await Chat.findById(req.body.msg.chat._id);
-    console.log(2);
-    console.log(chat);
-    console.log(chat.active === false);
 
     if (chat.active === false) {
       if (!chat.activeFor.includes(req.user._id)) {
@@ -26,49 +23,39 @@ export const sendMsg = async (req: any, res: Response, next: NextFunction) => {
         chat.activeFor.push(userContactId);
       }
 
-      console.log(3);
       const user = await User.findById(req.user._id);
       const userContact = await User.findById(userContactId);
 
       if (user) {
-        console.log(4);
         const index = user.contact?.findIndex((ref: any) => {
           return ref.idRef._id.toString() === userContactId.toString();
         });
 
         if (user.contact && index !== -1) {
-          console.log(5);
           user.contact[index as number].active = true;
           await user.save();
         }
       }
       if (userContact) {
-        console.log(6);
         const index = userContact.contact?.findIndex((ref: any) => {
           return ref.idRef._id.toString() === req.user._id.toString();
         });
 
         if (userContact.contact && index !== -1) {
-          console.log(7);
           userContact.contact[index as number].active = true;
           await userContact.save();
         } else if (index === -1 && user) {
-          console.log(8);
           userContact?.contact?.push({
             idRef: req.user._id,
             active: true,
             userName: user.userName,
           });
           await userContact?.save();
-          console.log(9);
         }
       }
       chat.active = true;
       chat.save();
-      console.log(10);
     }
-    console.log("run!!!");
-    console.log(req.body);
     await Messages.create({
       userSenderId: req.user._id,
       contentMsg: req.body.msg.content,
@@ -76,7 +63,6 @@ export const sendMsg = async (req: any, res: Response, next: NextFunction) => {
       recivedMsgId: req.body.msg.recivedMsgId,
       chatId: chat?._id,
     });
-    console.log(11);
 
     res.status(200).json({
       status: "success",

@@ -221,7 +221,6 @@ export const getData = async (req: any, res: Response, next: NextFunction) => {
         return { chat, chatMsgs };
       })
     );
-    console.log(chatsWithLast20Msgs);
     res.json(chatsWithLast20Msgs);
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -235,8 +234,6 @@ export const deleteContact = async (
   next: NextFunction
 ) => {
   try {
-    console.log("req11", req.body.chatId);
-    console.log("req22", req.body.contactId);
     const updatedChat = await Chat.findOneAndUpdate(
       { _id: req.body.chatId },
       {
@@ -250,8 +247,6 @@ export const deleteContact = async (
       { $pull: { contact: { idRef: req.body.contactId } } },
       { new: true }
     );
-    console.log(user);
-    console.log(updatedChat);
     if (!updatedChat) throw new AppError("Chat not found", 400);
 
     res.status(200).json({

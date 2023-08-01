@@ -15,7 +15,6 @@ const removeUser = (socketId: any) => {
 };
 
 const getUser = (userId: any) => {
-  console.log(userId);
   return users.find((user: any) => {
     return user.userId === userId;
   });
@@ -34,7 +33,6 @@ export const socketFunctionality = (server: any) => {
     console.log("a user connected.");
 
     socket.on("addUser", (userId) => {
-      console.log("?????", userId);
       addUser(userId, socket.id);
       io.emit("getUsers", users);
     });
