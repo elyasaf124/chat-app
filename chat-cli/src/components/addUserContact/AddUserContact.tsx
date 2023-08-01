@@ -3,6 +3,7 @@ import "./addUserContact.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { closeAddUserMode } from "../../features/loginMoodSlice";
+import { baseUrl } from "../../main";
 
 const AddUserContact = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const AddUserContact = () => {
     try {
       await axios
         .create({ withCredentials: true })
-        .post(`http://localhost:3000/user/addUserContact`, {
+        .post(`${baseUrl}/user/addUserContact`, {
           email: user.email,
           userName: user.userName,
         })

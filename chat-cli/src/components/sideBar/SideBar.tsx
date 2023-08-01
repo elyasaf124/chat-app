@@ -9,6 +9,7 @@ import Search from "../search/Search";
 import Chats from "../chats/Chats";
 import axios from "axios";
 import "./sideBar.css";
+import { baseUrl } from "../../main";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const SideBar = () => {
   const fetchContacts = async () => {
     axios
       .create({ withCredentials: true })
-      .get(`http://localhost:3000/user/getAllUsersContact`)
+      .get(`${baseUrl}/user/getAllUsersContact`)
       .then((res) => {
         setContacts(res.data.contact);
         dispatch(setUserContactChat(res.data.contact));

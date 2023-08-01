@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoginStatus, setUserDetails } from "../../features/loginMoodSlice";
 import "./login.css";
+import { baseUrl } from "../../main";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Login = () => {
     try {
       await axios
         .create({ withCredentials: true })
-        .post(`http://localhost:3000/user/login`, {
+        .post(`${baseUrl}/user/login`, {
           email: user.email,
           password: user.password,
         })

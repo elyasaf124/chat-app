@@ -7,6 +7,7 @@ import { AiFillPicture } from "react-icons/ai/";
 import { setLoginStatus, setUserDetails } from "../../features/loginMoodSlice";
 import { cloudinaryFunction } from "../../cloudinary";
 import { IuserRegister } from "../../types/userTypes";
+import { baseUrl } from "../../main";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Register = () => {
       const fileData = await cloudinaryFunction(user.img, "image");
 
       await axios
-        .post("http://localhost:3000/user/register", {
+        .post(`${baseUrl}/user/register`, {
           user,
           cloud: fileData,
         })

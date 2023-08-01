@@ -15,6 +15,7 @@ import { socket } from "../../socket";
 import { cloudMsg } from "../../types/messagesType";
 import { addNewMsg, updateChatsOrder } from "../../scripts/fetchIntialData";
 import { useState } from "react";
+import { baseUrl } from "../../main";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const Chat = () => {
       };
       await axios.create({ withCredentials: true }).post(
         `
-        http://localhost:3000/messages/sendMsg/${chatUser[0].idRef._id}`,
+        ${baseUrl}/messages/sendMsg/${chatUser[0].idRef._id}`,
         {
           msg: {
             senderId: currentUser._id,

@@ -25,6 +25,7 @@ import {
 import axios from "axios";
 import { IMessage } from "./types/messagesType";
 import { AuthState } from "./features/loginMoodSlice";
+import { baseUrl } from "./main";
 
 function App() {
   const isLoggedIn = useSelector((state: AuthState) => state.auth.isLoggedIn);
@@ -90,7 +91,7 @@ function App() {
     try {
       const response = await axios
         .create({ withCredentials: true })
-        .get(`http://localhost:3000/chats/getChatById/${msg.chatId}`);
+        .get(`${baseUrl}/chats/getChatById/${msg.chatId}`);
       return response.data.chat;
     } catch (error) {
       console.error(error);

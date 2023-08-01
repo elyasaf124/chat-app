@@ -16,6 +16,7 @@ import { IRefUser } from "../../types/userTypes";
 import { IMessage } from "../../types/messagesType";
 import axios from "axios";
 import "./chats.css";
+import { baseUrl } from "../../main";
 
 const Chats = ({ chat, contacts }: { chat: IData; contacts: IRefUser[] }) => {
   const dispatch = useDispatch();
@@ -82,7 +83,7 @@ const Chats = ({ chat, contacts }: { chat: IData; contacts: IRefUser[] }) => {
     e.stopPropagation();
     axios
       .create({ withCredentials: true })
-      .patch(`http://localhost:3000/user/deleteContact`, {
+      .patch(`${baseUrl}/user/deleteContact`, {
         chatId: chat.chat._id,
         contactId: userContactDetails[0]?.idRef._id,
       })

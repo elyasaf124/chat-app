@@ -1,4 +1,5 @@
 import axios from "axios";
+import { baseUrl } from "./main";
 
 export const cloudinaryFunction = async (dataSave: any, type: string) => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -6,7 +7,7 @@ export const cloudinaryFunction = async (dataSave: any, type: string) => {
   try {
     const signatureResponse = await axios
       .create({ withCredentials: true })
-      .get("http://127.0.0.1:3000/user/get-signature");
+      .get(`${baseUrl}/user/get-signature`);
     const { signature, timestamp } = signatureResponse.data;
     const data = new FormData();
     data.append("file", dataSave);

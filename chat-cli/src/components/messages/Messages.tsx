@@ -12,6 +12,7 @@ import { chatState } from "../../features/chatSlice";
 import { IData } from "../../types/dataTypes";
 import axios from "axios";
 import "./messages.css";
+import { baseUrl } from "../../main";
 
 const Messages = ({ setNewToggle }: any) => {
   const CurrentUser = useSelector((state: AuthState) => state.auth.user);
@@ -85,7 +86,7 @@ const Messages = ({ setNewToggle }: any) => {
   const logPreviousMsgs = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/messages/getMessagesByChatId/${currentChat._id}?page=${pageNumber}&latestCreatedAt=${messages[0].createdAt}`,
+        `${baseUrl}/messages/getMessagesByChatId/${currentChat._id}?page=${pageNumber}&latestCreatedAt=${messages[0].createdAt}`,
         { withCredentials: true }
       );
       logPreviosMsgs(res.data.messages);
@@ -197,7 +198,7 @@ const Messages = ({ setNewToggle }: any) => {
   const updateMsgsAsRead = async () => {
     await axios
       .patch(
-        `http://localhost:3000/messages/setMessagesRead/${currentChat._id}/${chatUser[0]?.idRef._id}`
+        `${baseUrl}/messages/setMessagesRead/${currentChat._id}/${chatUser[0]?.idRef._id}`
       )
       .catch((err: any) => {
         console.log(err);

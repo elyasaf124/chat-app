@@ -3,12 +3,13 @@ import { IMessage } from "../types/messagesType";
 import { cloneDeep } from "lodash";
 import { IData } from "../types/dataTypes";
 import { IChat } from "../types/chatTypes";
+import { baseUrl } from "../main";
 
 export let data: IData[];
 export const fetchData = async () => {
   const res: AxiosResponse<IData[]> = await axios
     .create({ withCredentials: true })
-    .get(`http://localhost:3000/user/getData`);
+    .get(`${baseUrl}/user/getData`);
   console.log(res.data);
   data = res.data;
   data = await sortData(data);
