@@ -22,6 +22,7 @@ export const corsOptions: any = {
     "http://localhost:3001",
     "http://localhost:3000/socket.io",
     "https://chat-cli.onrender.com",
+    "https://chat-api-ckbb.onrender.com/socket.io",
     "https://chat-api-ckbb.onrender.com",
   ],
   optionsSuccessStatus: 200,
