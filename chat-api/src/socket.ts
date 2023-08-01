@@ -21,7 +21,7 @@ const getUser = (userId: any) => {
 };
 
 export const socketFunctionality = (server: any) => {
-  console.log(webOrigin);
+  console.log("webOrigin=>", webOrigin);
   const io = new SocketIo(server, {
     cors: {
       origin: [
