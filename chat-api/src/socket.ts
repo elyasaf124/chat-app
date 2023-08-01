@@ -38,11 +38,8 @@ export const socketFunctionality = (server: any) => {
     });
 
     socket.on("sendMessage", async (data) => {
-      console.log("send");
-      console.log(data);
       try {
         const user = await getUser(data.recivedMsgId);
-        console.log(user.socketId);
         if (!user) throw new AppError("cant find user please try again", 400);
         io.to(user.socketId).emit("getMessage", {
           userSenderId: data.userSenderId,
