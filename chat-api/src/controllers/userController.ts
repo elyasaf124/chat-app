@@ -208,6 +208,7 @@ export const getAllUsers = async (
 
 export const getData = async (req: any, res: Response, next: NextFunction) => {
   try {
+    console.log("req.user._id", req.user._id);
     const chats = await Chat.find({ activeFor: { $in: req.user._id } });
 
     // Fetch last 20 messages for each chat
