@@ -8,6 +8,7 @@ import {
   setUserDetails,
 } from "../../features/loginMoodSlice";
 import { closeChat } from "../../features/chatSlice";
+import { baseUrl } from "../../main";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const NavBar = () => {
 
   const logout = async () => {
     await axios
-      .get(`http://localhost:3000/user/logout`, { withCredentials: true })
+      .get(`${baseUrl}/user/logout`, { withCredentials: true })
       .then((res) => {
         if (res.data.status == "success") {
           dispatch(setLogout());
