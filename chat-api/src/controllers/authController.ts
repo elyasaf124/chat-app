@@ -37,7 +37,10 @@ export const createSendToken = async (
     httpOnly: true,
   };
 
+  console.log("process.env.NODE_ENV", process.env.NODE_ENV);
+  console.log(process.env.NODE_ENV === "production");
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  console.log("pass");
 
   res.cookie("jwt", token, cookieOptions);
 
