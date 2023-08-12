@@ -9,6 +9,7 @@ import {
 } from "../../features/loginMoodSlice";
 import { closeChat } from "../../features/chatSlice";
 import { baseUrl } from "../../main";
+import { socket } from "../../socket";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const NavBar = () => {
       .get(`${baseUrl}/user/logout`, { withCredentials: true })
       .then((res) => {
         if (res.data.status == "success") {
+          socket.disconnect();
           dispatch(setLogout());
           dispatch(closeChat());
           dispatch(setUserDetails({}));
