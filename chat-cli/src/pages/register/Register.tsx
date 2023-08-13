@@ -89,6 +89,7 @@ const Register = () => {
                 onChange={(e) => handleChange(e)}
                 type="password"
                 className="register-input password"
+                placeholder="at least 8 characters..."
               />
             </div>
             <div className="register-input-container">
