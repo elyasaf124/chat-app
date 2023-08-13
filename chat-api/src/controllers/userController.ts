@@ -94,6 +94,8 @@ export const addUserContact = async (
     const userContact: any = await User.find({ email: req.body.email });
     const user = req.user;
 
+    console.log("userContact=>", userContact);
+    console.log("user=>", user);
     const userExists = user.contact.find((userRef: any) => {
       return userRef.idRef.equals(userContact[0]._id);
     });
