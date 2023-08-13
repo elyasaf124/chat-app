@@ -26,20 +26,25 @@ export const createSendToken = async (
   res: Response
 ) => {
   const token = await signToken(user._id);
-  const cookieOptions = {
+  const cookieOptions: {
+    expires: Date;
+    secure: boolean;
+    httpOnly: boolean;
+    sameSite: "lax" | "none" | "strict" | boolean;
+  } = {
     expires: new Date(
       Date.now() +
         Number(process.env.JWT_COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000
     ),
-    //קוקי נשלח רק בחיבור מאובטח
-    secure: false,
-    //דואג שהטוקן לא יוכל להשתנות או שיהיה אליו גישה על ידי הדפדפן
+    secure: false, // Set to false by default
     httpOnly: true,
+    sameSite: "lax", // Set the SameSite attribute to "lax"
   };
 
-  console.log("process.env.NODE_ENV", process.env.NODE_ENV);
-  console.log(process.env.NODE_ENV === "production");
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  if (process.env.NODE_ENV === "production") {
+    cookieOptions.secure = true;
+    cookieOptions.sameSite = "none"; // Update SameSite for production
+  }
   console.log("pass");
 
   res.cookie("jwt", token, cookieOptions);
