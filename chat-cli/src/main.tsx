@@ -7,7 +7,6 @@ import App from "./App.tsx";
 import "./index.css";
 import { store } from "./features/store.ts";
 import { persistor } from "./features/store.ts";
-import React from "react";
 
 export let baseUrl = "";
 if (process.env.NODE_ENV === "production") {
