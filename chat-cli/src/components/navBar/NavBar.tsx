@@ -19,7 +19,10 @@ const NavBar = () => {
 
   const logout = async () => {
     await axios
-      .get(`${baseUrl}/user/logout`, { withCredentials: true })
+      .get(
+        `${baseUrl}/user/logout`
+        //  { withCredentials: true }
+      )
       .then((res) => {
         if (res.data.status == "success") {
           socket.disconnect();

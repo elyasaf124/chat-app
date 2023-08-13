@@ -8,7 +8,7 @@ import { baseUrl } from "../main";
 export let data: IData[];
 export const fetchData = async () => {
   const res: AxiosResponse<IData[]> = await axios
-    .create({ withCredentials: true })
+    // .create({ withCredentials: true })
     .get(`${baseUrl}/user/getData`);
   console.log(res.data);
   data = res.data;
