@@ -100,6 +100,7 @@ export const addUserContact = async (
       return userRef.idRef.equals(userContact[0]._id);
     });
 
+    console.log("userExists=>", userExists);
     if (userExists) {
       throw new AppError("This user already exists in your content", 400);
     }
@@ -119,7 +120,10 @@ export const addUserContact = async (
     const chat = await Chat.find({ members: { $all: arr } });
 
     if (chat.length === 0) {
-      await Chat.create({ members: [user._id, userContact[0]._id] });
+      await Chat.create({
+        members: [user._id, userContact[0]._id],
+        activeFor: [user._id],
+      });
     }
     const chatContact = user.contact[user.contact.length - 1];
     chatContact.idRef = userContact[0];
@@ -210,9 +214,9 @@ export const getAllUsers = async (
 
 export const getData = async (req: any, res: Response, next: NextFunction) => {
   try {
-    console.log("req.user._id", req.user._id);
+    // console.log("req.user._id", req.user._id);
     const chats = await Chat.find({ activeFor: { $in: req.user._id } });
-
+    console.log(chats);
     // Fetch last 20 messages for each chat
     const chatsWithLast20Msgs = await Promise.all(
       chats.map(async (chat) => {
@@ -221,9 +225,11 @@ export const getData = async (req: any, res: Response, next: NextFunction) => {
           .limit(20)
           .exec();
         chatMsgs.reverse();
+
         return { chat, chatMsgs };
       })
     );
+    // console.log(chatMsgs);
     res.json(chatsWithLast20Msgs);
   } catch (error) {
     console.error("Error fetching data:", error);

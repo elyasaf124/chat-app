@@ -135,37 +135,37 @@ export const logOut = async (
 };
 
 export const protect = async (req: any, res: Response, next: NextFunction) => {
-  console.log(1);
+  // console.log(1);
   // 1) Getting token and check if it's there
   let token;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    console.log(2);
+    // console.log(2);
     token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.jwt) {
     token = req.cookies.jwt;
   }
-  console.log(4);
+  // console.log(4);
   if (!token) return next();
-  console.log(5);
+  // console.log(5);
 
   // 2) Verification token
   try {
-    console.log(6);
+    // console.log(6);
     // @ts-ignore
     const decoded: any = await promisify(jwt.verify)(
       token,
       // @ts-ignore
       process.env.JWT_SECRETT as string
     );
-    console.log(7);
+    // console.log(7);
 
     // 3) Check if user still exists
     const currentUser = await User.findById(decoded.id);
     if (!currentUser) {
-      console.log(8);
+      // console.log(8);
       return next(new Error("User not found"));
     }
 
@@ -175,9 +175,9 @@ export const protect = async (req: any, res: Response, next: NextFunction) => {
     }
 
     // GRANT ACCESS TO PROTECTED ROUTE
-    console.log(9);
+    // console.log(9);
     req.user = currentUser;
-    console.log(req.user);
+    // console.log(req.user);
     next();
   } catch (err) {
     // Handle verification error
