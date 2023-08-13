@@ -30,7 +30,8 @@ export const corsOptions: any = {
 
 app.use(compression());
 app.use(cookieParser());
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
