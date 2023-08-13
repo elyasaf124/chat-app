@@ -14,16 +14,20 @@ import { baseUrl } from "../../main";
 const SideBar = () => {
   const dispatch = useDispatch();
   const [contacts, setContacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const searchActive = useSelector((state: any) => state.search.searchActive);
   const searchUsers = useSelector((state: any) => state.search.searchUsers);
   const renderChats = useSelector((state: chatState) => state.chat.renderChats);
   const userId = useSelector((state: AuthState) => state.auth.user._id);
 
   useEffect(() => {
-    fetchContacts();
+    fetchContacts().then(() => {
+      setIsLoading(false);
+    });
   }, [renderChats]);
 
   const fetchContacts = async () => {
+    if (!data) return;
     axios
       .create({ withCredentials: true })
       .get(`${baseUrl}/user/getAllUsersContact`)
@@ -51,7 +55,11 @@ const SideBar = () => {
     <div className="side-bar">
       <NavBar />
       <Search />
-      {data?.length > 0 && <div className="chats-box"> {getUsers()}</div>}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        data?.length > 0 && <div className="chats-box"> {getUsers()}</div>
+      )}
     </div>
   );
 };

@@ -216,7 +216,6 @@ export const getData = async (req: any, res: Response, next: NextFunction) => {
   try {
     // console.log("req.user._id", req.user._id);
     const chats = await Chat.find({ activeFor: { $in: req.user._id } });
-    console.log(chats);
     // Fetch last 20 messages for each chat
     const chatsWithLast20Msgs = await Promise.all(
       chats.map(async (chat) => {
@@ -229,7 +228,6 @@ export const getData = async (req: any, res: Response, next: NextFunction) => {
         return { chat, chatMsgs };
       })
     );
-    // console.log(chatMsgs);
     res.json(chatsWithLast20Msgs);
   } catch (error) {
     console.error("Error fetching data:", error);

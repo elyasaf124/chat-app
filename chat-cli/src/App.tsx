@@ -32,7 +32,9 @@ function App() {
   const currentUserId = useSelector((state: AuthState) => state.auth.user._id);
 
   const dispatch = useDispatch();
-  fetchData();
+  fetchData().then(() => {
+    dispatch(setRenderChats());
+  });
 
   useEffect(() => {
     if (!isLoggedIn) return;
