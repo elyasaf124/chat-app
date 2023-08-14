@@ -7,6 +7,7 @@ import { baseUrl } from "../../main";
 
 const AddUserContact = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     email: "",
     userName: "",
@@ -22,7 +23,11 @@ const AddUserContact = () => {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (user.email === "" || user.userName === "") return;
+    if (user.email === "" || user.userName === "") {
+      alert("Please fill in all fields");
+      return;
+    }
+    setLoading(true);
     try {
       await axios
         .create({ withCredentials: true })
@@ -35,12 +40,14 @@ const AddUserContact = () => {
             alert("user adding successfuly");
             dispatch(closeAddUserMode());
           }
+          setLoading(false);
         });
     } catch (error: any) {
       if (error.response.data.status === "fail") {
         alert(error.response.data.message);
       }
     }
+    setLoading(false);
   };
   return (
     <div
@@ -74,7 +81,7 @@ const AddUserContact = () => {
             />
           </div>
           <button onClick={(e) => AddUser(e)} className="register-form-btn">
-            Add
+            {loading ? "loading..." : "Add"}
           </button>
         </form>
       </div>
