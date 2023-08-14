@@ -7,13 +7,16 @@ import { baseUrl } from "../main";
 
 export let data: IData[];
 export const fetchData = async () => {
-  const res: AxiosResponse<IData[]> = await axios
-    .create({ withCredentials: true })
-    .get(`${baseUrl}/user/getData`);
-  console.log(res.data);
-  data = res.data;
-  data = await sortData(data);
-  return data;
+  try {
+    const res: AxiosResponse<IData[]> = await axios
+      .create({ withCredentials: true })
+      .get(`${baseUrl}/user/getData`);
+    data = res.data;
+    data = await sortData(data);
+    return data;
+  } catch (error) {
+    console.log("u miss");
+  }
 };
 
 const sortData = (data: IData[]) => {

@@ -89,8 +89,12 @@ const Messages = ({ setNewToggle }: any) => {
         `${baseUrl}/messages/getMessagesByChatId/${currentChat._id}?page=${pageNumber}&latestCreatedAt=${messages[0].createdAt}`,
         { withCredentials: true }
       );
-      logPreviosMsgs(res.data.messages);
-      setMessages((prev: IMessage[]) => [...res.data.messages, prev]);
+      console.log(res.data);
+      // logPreviosMsgs(res.data.messages);
+      setMessages((prev: IMessage[]) => {
+        console.log(prev);
+        return [...res.data.messages, ...prev];
+      });
       setToggle(!toggle);
       setUnReadCount(null);
       setUnReadCountIndex(-1);

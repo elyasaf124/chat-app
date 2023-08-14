@@ -28,6 +28,7 @@ const SideBar = () => {
 
   const fetchContacts = async () => {
     if (!data) return;
+    if (contacts.length > 0) return;
     axios
       .create({ withCredentials: true })
       .get(`${baseUrl}/user/getAllUsersContact`)
