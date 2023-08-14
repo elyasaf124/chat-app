@@ -38,7 +38,7 @@ const AddUserContact = () => {
         });
     } catch (error: any) {
       if (error.response.data.status === "fail") {
-        alert("user allready exits");
+        alert(error.response.data.message);
       }
     }
   };

@@ -92,6 +92,9 @@ export const addUserContact = async (
 ) => {
   try {
     const userContact: any = await User.find({ email: req.body.email });
+
+    if (userContact.length === 0)
+      throw new AppError("user dosen't exits please try again", 400);
     const user = req.user;
 
     console.log("userContact=>", userContact);
