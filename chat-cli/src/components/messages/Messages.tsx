@@ -2,11 +2,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import Message from "../message/Message";
 import { IMessage } from "../../types/messagesType";
-import {
-  data,
-  logPreviosMsgs,
-  updateDataMsgsAsRead,
-} from "../../scripts/fetchIntialData";
+import { data, updateDataMsgsAsRead } from "../../scripts/fetchIntialData";
 import { AuthState } from "../../features/loginMoodSlice";
 import { chatState } from "../../features/chatSlice";
 import { IData } from "../../types/dataTypes";
@@ -90,7 +86,6 @@ const Messages = ({ setNewToggle }: any) => {
         { withCredentials: true }
       );
       console.log(res.data);
-      // logPreviosMsgs(res.data.messages);
       setMessages((prev: IMessage[]) => {
         console.log(prev);
         return [...res.data.messages, ...prev];
