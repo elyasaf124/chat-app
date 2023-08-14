@@ -81,7 +81,7 @@ const AddUserContact = () => {
             />
           </div>
           <button onClick={(e) => AddUser(e)} className="register-form-btn">
-            {loading ? "loading..." : "Add"}
+            {loading ? <span className="loader"></span> : "Add"}
           </button>
         </form>
       </div>

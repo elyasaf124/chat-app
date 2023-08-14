@@ -91,7 +91,7 @@ export const signup = async (
   } catch (error: any) {
     res.status(400).json({
       status: "fail",
-      errorMsg: "please fill all details",
+      errorMsg: "please fill correct all details",
       error: error._message,
     });
   }

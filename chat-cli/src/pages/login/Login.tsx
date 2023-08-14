@@ -9,6 +9,7 @@ import { baseUrl } from "../../main";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -27,6 +28,13 @@ const Login = () => {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    setLoading(true);
+    if (user.email === "" || user.password === "") {
+      alert("Please fill in all fields");
+      setLoading(false);
+      return;
+    }
+    console.log("login");
     try {
       await axios
         .create({ withCredentials: true })
@@ -38,6 +46,9 @@ const Login = () => {
           dispatch(setLoginStatus());
           dispatch(setUserDetails(res.data.user));
           navigate("/");
+        })
+        .finally(() => {
+          setLoading(false);
         });
     } catch (error: any) {
       setErrorLogin(true);
@@ -76,7 +87,7 @@ const Login = () => {
               <span className="error-login-msg">* {errorMsg}</span>
             )}
             <button className="register-form-btn" onClick={(e) => login(e)}>
-              Sign in
+              {loading ? <span className="loader"></span> : "Sign in"}
             </button>
             <span className="to-login-text">
               do not have an account?

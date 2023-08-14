@@ -12,6 +12,7 @@ import { baseUrl } from "../../main";
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [user, setUser] = useState<IuserRegister>({
@@ -23,6 +24,16 @@ const Register = () => {
     img: undefined,
   });
 
+  const isFormValid = () => {
+    return (
+      user.userName &&
+      user.email &&
+      user.password &&
+      user.passwordConfirm &&
+      user.img
+    );
+  };
+
   const handleSubmit = async (
     e:
       | React.FormEvent<HTMLFormElement>
@@ -30,6 +41,13 @@ const Register = () => {
   ) => {
     try {
       e.preventDefault();
+      if (!isFormValid()) {
+        setErrorLogin(true);
+        setErrorMsg("Please fill out all fields.");
+        return;
+      }
+
+      setLoading(true);
       const fileData = await cloudinaryFunction(user.img, "image");
 
       await axios
@@ -43,6 +61,8 @@ const Register = () => {
           navigate("/", { replace: true });
         });
     } catch (error: any) {
+      setLoading(false);
+
       setErrorLogin(true);
       setErrorMsg(error.response.data.errorMsg);
     }
@@ -124,7 +144,7 @@ const Register = () => {
               className="register-form-btn"
               onClick={(e) => handleSubmit(e)}
             >
-              Sign up
+              {loading ? <span className="loader"></span> : "Sign up"}
             </button>
             <span className="to-login-text">
               You do have an account?
