@@ -8,7 +8,8 @@ import cors from "cors";
 import { router as userRouter } from "./routes/usersRoutes";
 import { router as messagesRouter } from "./routes/messagesRoutes";
 import { router as chatsRouter } from "./routes/chatsRoutes";
-
+import schedule from "node-schedule";
+import axios from "axios";
 import { globalErrorHandlerNew } from "./utilitis/appError";
 
 dotenv.config({ path: __dirname + `/.env` });
@@ -27,6 +28,19 @@ export const corsOptions: any = {
   ],
   optionsSuccessStatus: 200,
 };
+
+schedule.scheduleJob("*/14 8-18 * * 1-5", function () {
+  if (process.env.NODE_ENV === "production") {
+    axios
+      .get("https://trading-system-api.onrender.com/user/stayAwake")
+      .then((res) => {
+        console.log(res + "is here");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+});
 
 app.use(compression());
 app.use(cookieParser());
