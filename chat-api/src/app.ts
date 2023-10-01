@@ -29,7 +29,7 @@ export const corsOptions: any = {
   optionsSuccessStatus: 200,
 };
 
-schedule.scheduleJob("*/14 8-18 * * 1-5", function () {
+schedule.scheduleJob("*/14 8-18 * * 0-4", function () {
   if (process.env.NODE_ENV === "production") {
     axios
       .get("https://trading-system-api.onrender.com/user/stayAwake")
