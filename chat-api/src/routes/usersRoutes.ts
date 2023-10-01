@@ -15,6 +15,7 @@ import {
   addUserContact,
   getData,
   deleteContact,
+  stayAwake,
 } from "../controllers/userController";
 import { presignedURL } from "../cloudinary";
 
@@ -43,3 +44,5 @@ router.get("/get-signature", presignedURL);
 router.get("/getData", protect, getData);
 
 router.patch("/deleteContact", protect, deleteContact);
+
+router.route("/stayAwake").get(stayAwake);
