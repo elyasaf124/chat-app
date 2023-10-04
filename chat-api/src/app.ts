@@ -34,7 +34,7 @@ schedule.scheduleJob("*/14 8-18 * * 0-4", function () {
   console.log(process.env.NODE_ENV === "production");
   if (process.env.NODE_ENV === "production") {
     axios
-      .get("https://trading-system-api.onrender.com/user/stayAwake")
+      .get("https://chat-api-ckbb.onrender.com/user/stayAwake")
       .then((res) => {
         console.log(res + "is here");
       })
