@@ -30,6 +30,7 @@ export const corsOptions: any = {
 };
 
 schedule.scheduleJob("*/14 8-18 * * 0-4", function () {
+  console.log("run!");
   if (process.env.NODE_ENV === "production") {
     axios
       .get("https://trading-system-api.onrender.com/user/stayAwake")
