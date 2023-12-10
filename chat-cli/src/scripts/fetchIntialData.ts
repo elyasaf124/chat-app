@@ -8,6 +8,7 @@ import { baseUrl } from "../main";
 export let data: IData[];
 export const fetchData = async () => {
   try {
+    console.log(baseUrl);
     const res: AxiosResponse<IData[]> = await axios
       .create({ withCredentials: true })
       .get(`${baseUrl}/user/getData`);
@@ -15,7 +16,7 @@ export const fetchData = async () => {
     data = await sortData(data);
     return data;
   } catch (error) {
-    console.log("u miss");
+    console.log("u misss");
   }
 };
 
